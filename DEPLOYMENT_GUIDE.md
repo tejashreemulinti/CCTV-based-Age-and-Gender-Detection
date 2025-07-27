@@ -1,295 +1,387 @@
-# CCTV Age & Gender Detection System - Deployment Guide
+# 🚀 Windows Deployment Guide
 
-## System Overview
+Complete step-by-step guide for deploying the CCTV Age and Gender Detection System on Windows environments.
 
-This is a comprehensive real-time face detection and demographic analysis system built with:
+## ⚡ Quick Start (5 Minutes)
 
-- **Backend**: Python Flask + OpenCV + Socket.IO
-- **Frontend**: React.js + Material-UI + WebRTC
-- **Features**: Real-time face detection, age/gender estimation, live statistics dashboard
-- **Performance**: 10-15 FPS on CPU, supports up to 4 faces simultaneously
+**For immediate setup on Windows:**
 
-## 🚀 Quick Setup (Automated)
+1. **Download** Python 3.8+ and Node.js 16+ from their official websites
+2. **Extract** this project to a folder (e.g., `C:\cctv-detection`)
+3. **Open Command Prompt** as Administrator
+4. **Navigate** to project folder: `cd C:\cctv-detection`
+5. **Run**: `setup.bat`
+6. **Start system**: `run_system.bat`
+7. **Open browser**: `http://localhost:3000`
 
-### Option 1: Use the Setup Script
-```bash
-# Make the setup script executable and run it
-chmod +x setup.sh
-./setup.sh
-```
+**That's it! 🎉 The system should now be running.**
 
-### Option 2: Manual Setup
+---
 
-## 📋 Prerequisites
+## 📋 System Requirements
 
-- Python 3.8+ (currently using Python 3.13)
-- Node.js 16+ (currently using Node.js 18.20.8)
-- Webcam or CCTV camera access
-- Modern web browser with WebRTC support
+### Minimum Requirements
+- **OS**: Windows 10 or Windows 11
+- **RAM**: 4GB minimum, 8GB recommended
+- **CPU**: Intel Core i3 or AMD equivalent (with SSE4.2 support)
+- **Storage**: 2GB free space
+- **Camera**: Built-in webcam or USB camera
+- **Internet**: For initial dependency downloads
 
-## 🛠️ Manual Installation Steps
+### Software Prerequisites
+- **Python 3.8-3.12** (3.13 may have compatibility issues)
+- **Node.js 16+** (LTS version recommended)
+- **Git** (optional, for cloning repository)
+- **Modern Web Browser** (Chrome 80+, Firefox 75+, Edge 80+)
 
-### 1. Clone and Setup Backend
+## 🛠️ Installation Methods
 
-```bash
-# Install Python virtual environment
-python3 -m venv venv
-source venv/bin/activate
+### Method 1: Automated Setup (Recommended)
 
-# Install Python dependencies
-pip install flask flask-cors flask-socketio opencv-python numpy pillow python-socketio eventlet requests
+1. **Download/Clone the Project**
+   ```cmd
+   # If you have Git installed
+   git clone <repository-url>
+   cd cctv-detection-system
+   
+   # Or download and extract the ZIP file
+   ```
 
-# Start the backend server
+2. **Run Automated Setup**
+   ```cmd
+   # Right-click on setup.bat and "Run as Administrator"
+   # OR in Command Prompt:
+   setup.bat
+   ```
+
+3. **Start the System**
+   ```cmd
+   run_system.bat
+   ```
+
+### Method 2: Manual Installation
+
+#### Step 1: Install Python Dependencies
+
+1. **Open Command Prompt** (preferably as Administrator)
+2. **Navigate to project directory**:
+   ```cmd
+   cd C:\path\to\cctv-detection-system
+   ```
+
+3. **Create Virtual Environment**:
+   ```cmd
+   python -m venv venv
+   ```
+
+4. **Activate Virtual Environment**:
+   ```cmd
+   venv\Scripts\activate.bat
+   ```
+
+5. **Upgrade pip and install dependencies**:
+   ```cmd
+   python -m pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+
+#### Step 2: Install Node.js Dependencies
+
+1. **Open new Command Prompt window**
+2. **Navigate to frontend directory**:
+   ```cmd
+   cd C:\path\to\cctv-detection-system\frontend
+   ```
+
+3. **Install dependencies**:
+   ```cmd
+   npm install
+   ```
+
+#### Step 3: Start Services
+
+**Backend Server** (first Command Prompt):
+```cmd
+# Ensure virtual environment is activated
+venv\Scripts\activate.bat
 cd backend
 python app.py
 ```
 
-The backend will start on `http://localhost:5000`
-
-### 2. Setup Frontend
-
-```bash
-# Install Node.js dependencies
+**Frontend Server** (second Command Prompt):
+```cmd
 cd frontend
-npm install
-
-# Start the React development server
 npm start
 ```
 
-The frontend will start on `http://localhost:3000`
+## 🌐 Access & Usage
 
-## 🌐 Accessing the Application
+1. **Backend API**: `http://localhost:5000`
+2. **Frontend Web App**: `http://localhost:3000`
+3. **Allow camera permissions** when prompted by browser
+4. **Click "Start Detection"** to begin real-time analysis
 
-1. Open your web browser and navigate to `http://localhost:3000`
-2. Allow camera access when prompted
-3. Click "Start Stream" to begin real-time detection
-4. View live results with face detection overlays and demographic analysis
+## ⚙️ Configuration
 
-## 📊 Features & Usage
+### Camera Settings
 
-### Real-time Face Detection
-- Uses OpenCV Haar Cascades for fast face detection
-- Supports multiple faces (up to 4 simultaneously)
-- Real-time bounding box overlays
-- Live FPS counter
+Edit `frontend\src\components\VideoStream.js`:
+```javascript
+const videoConstraints = {
+  width: 640,      // Adjust resolution
+  height: 480,     // Adjust resolution
+  facingMode: "user"
+};
+```
 
-### Age & Gender Analysis
-- Lightweight demographic estimation
-- Confidence scores for each prediction
-- Age group classification (0-12, 13-19, 20-29, etc.)
-- Binary gender classification
+### Performance Settings
 
-### Analytics Dashboard
-- Live statistics (total faces, current faces, detection rate)
-- Age distribution chart
-- Gender distribution pie chart
-- System status indicators
-- Exportable statistics
-
-### Web Interface Features
-- Modern Material-UI design
-- Responsive layout
-- Real-time WebSocket communication
-- Camera feed with overlay annotations
-- Toggleable statistics panel
-
-## 🔧 Configuration Options
-
-### Backend Configuration (`backend/app.py`)
-- Port: Default 5000
-- Detection confidence threshold
-- Statistics update frequency
-- CORS settings for frontend access
-
-### Frontend Configuration (`frontend/src/`)
-- Video capture settings
-- Chart visualization options
-- UI theme and styling
-- WebSocket connection settings
-
-### Performance Tuning
+Edit `backend\simple_detection.py`:
 ```python
-# In backend/simple_detection.py
-# Adjust these parameters for better performance:
-
-# Face detection parameters
-scaleFactor=1.1,      # Detection scale (lower = more accurate, slower)
-minNeighbors=5,       # Min neighbors for detection
-minSize=(30, 30),     # Minimum face size
-
-# Frame processing
-capture_interval = 100  # milliseconds between frames (lower = faster)
+# Adjust face detection parameters
+faces = self.face_cascade.detectMultiScale(
+    gray,
+    scaleFactor=1.1,      # Lower for more accuracy (slower)
+    minNeighbors=5,       # Higher for fewer false positives
+    minSize=(30, 30),     # Minimum face size
+    flags=cv2.CASCADE_SCALE_IMAGE
+)
 ```
 
-## 🐳 Docker Deployment
+### Port Configuration
 
-### Using Docker Compose
-```bash
-# Build and run both services
-docker-compose up --build
-
-# Access the application
-# Frontend: http://localhost:3000
-# Backend: http://localhost:5000
+**Backend Port** (`backend\app.py`):
+```python
+if __name__ == '__main__':
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)  # Change port here
 ```
 
-### Individual Docker Containers
-```bash
-# Build backend
-cd backend
-docker build -t cctv-backend .
-docker run -p 5000:5000 cctv-backend
-
-# Build frontend
-cd frontend
-docker build -t cctv-frontend .
-docker run -p 3000:3000 cctv-frontend
-```
-
-## 📈 Performance Metrics
-
-| Metric | Value |
-|--------|--------|
-| Face Detection Speed | 10-15 FPS (CPU) |
-| Maximum Faces | 4 simultaneous |
-| Processing Latency | <100ms per frame |
-| Memory Usage | ~500MB |
-| Model Size | <50MB total |
-| Browser Compatibility | Chrome, Firefox, Safari, Edge |
-
-## 🔒 Security & Privacy
-
-- **Local Processing**: All analysis happens locally, no external API calls
-- **No Data Storage**: Real-time processing only, no video/image storage
-- **Browser Permissions**: Camera access controlled by user
-- **Privacy-First**: Demographic analysis without identity recognition
-
-## 🚨 Troubleshooting
-
-### Common Issues
-
-#### Backend Issues
-```bash
-# Camera permission denied
-sudo chmod 666 /dev/video*
-
-# Missing OpenCV dependencies
-sudo apt-get install libglib2.0-0 libsm6 libxext6 libxrender-dev libgomp1
-
-# Port already in use
-lsof -i :5000
-kill -9 <PID>
-```
-
-#### Frontend Issues
-```bash
-# Node.js version issues
-nvm install 18
-nvm use 18
-
-# Package installation errors
-rm -rf node_modules package-lock.json
-npm install
-
-# WebRTC not working
-# Ensure HTTPS in production or localhost for development
-```
-
-#### Performance Issues
-```bash
-# Reduce video resolution in frontend/src/components/VideoStream.js
-videoConstraints = {
-  width: 480,    # Reduce from 640
-  height: 360,   # Reduce from 480
-  frameRate: { ideal: 10, max: 15 }  # Reduce frame rate
+**Frontend Proxy** (`frontend\package.json`):
+```json
+{
+  "proxy": "http://localhost:5000"  // Must match backend port
 }
-
-# Increase processing interval
-intervalId = setInterval(captureFrame, 200);  # Increase from 100ms
 ```
 
-## 🔄 System Architecture
+## 🔧 Troubleshooting
 
-```
-┌─────────────────┐    WebSocket     ┌─────────────────┐
-│   React Frontend│◄─────────────────►│  Flask Backend  │
-│ (Port 3000)     │                   │ (Port 5000)     │
-│                 │                   │                 │
-│ • WebRTC Camera │                   │ • OpenCV        │
-│ • Real-time UI  │                   │ • Face Detection│
-│ • Statistics    │                   │ • Demographics  │
-│ • Chart Display │                   │ • Socket.IO     │
-└─────────────────┘                   └─────────────────┘
-         │                                      │
-         ▼                                      ▼
-   ┌──────────┐                         ┌──────────────┐
-   │ Browser  │                         │ Detection    │
-   │ Camera   │                         │ Algorithms   │
-   │ WebRTC   │                         │ • Haar       │
-   └──────────┘                         │ • Age/Gender │
-                                        └──────────────┘
+### Common Installation Issues
+
+#### Python Issues
+
+**"Python is not recognized":**
+```cmd
+# Add Python to PATH or use full path:
+C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python39\python.exe -m venv venv
 ```
 
-## 📱 API Endpoints
+**"ensurepip is not available":**
+```cmd
+# Download and install Python from python.org with "Add to PATH" checked
+# Ensure pip is included in installation
+```
 
-### REST API
-- `GET /` - Health check
-- `GET /api/stats` - Get detection statistics
-- `POST /api/reset-stats` - Reset all statistics
+**Virtual environment activation fails:**
+```cmd
+# Try different activation method:
+venv\Scripts\activate
+# OR
+call venv\Scripts\activate.bat
+```
 
-### WebSocket Events
-- `connect` - Client connection
-- `disconnect` - Client disconnection  
-- `video_frame` - Send video frame for processing
-- `detection_result` - Receive detection results
-- `status` - Connection status updates
+#### Node.js Issues
 
-## 🎯 Use Cases
+**"node is not recognized":**
+- Restart Command Prompt after Node.js installation
+- Add Node.js to PATH manually: `C:\Program Files\nodejs`
 
-### Smart Retail
-- Customer demographic analysis
-- Foot traffic monitoring
-- Age-targeted advertising optimization
+**npm install fails with permission errors:**
+```cmd
+# Run Command Prompt as Administrator
+# OR configure npm for non-admin use:
+npm config set prefix "%APPDATA%\npm"
+```
 
-### Public Transport
-- Passenger flow analysis
-- Demographic statistics
-- Real-time occupancy monitoring
+#### Camera Issues
 
-### Event Management
-- Attendee demographics
-- Crowd analysis
-- Security monitoring
+**Camera not detected:**
+- Check Windows Privacy Settings > Camera
+- Ensure camera isn't used by another application
+- Try different browsers (Chrome recommended)
 
-### Education
-- Classroom engagement analysis
-- Demographic studies
-- Attendance monitoring
+**Permission denied:**
+- Allow camera access in browser settings
+- Check Windows Camera app works first
 
-## 🔮 Future Enhancements
+#### Network Issues
 
-- [ ] Support for actual pre-trained models (TensorFlow, PyTorch)
-- [ ] Multi-camera input support
-- [ ] Cloud deployment options
-- [ ] Mobile app development
-- [ ] Advanced analytics (emotion detection, pose estimation)
-- [ ] Real-time alerts and notifications
-- [ ] Database integration for historical data
-- [ ] Advanced export capabilities (CSV, PDF reports)
+**Port conflicts:**
+```cmd
+# Check what's using port 5000:
+netstat -ano | findstr :5000
 
-## 📞 Support
+# Kill process if needed:
+taskkill /PID <process_id> /F
+```
 
-For issues and questions:
-1. Check this deployment guide
-2. Review the main README.md
-3. Check the troubleshooting section
-4. Create an issue on GitHub
+**Firewall blocking:**
+- Add Python and Node.js to Windows Firewall exceptions
+- Temporarily disable antivirus for testing
 
-## 📄 License
+### Performance Issues
 
-This project is licensed under the MIT License. See LICENSE file for details.
+**Low FPS or high CPU usage:**
+
+1. **Close unnecessary applications**
+2. **Lower camera resolution**:
+   ```javascript
+   // In VideoStream.js
+   const videoConstraints = {
+     width: 320,    // Reduced from 640
+     height: 240    // Reduced from 480
+   };
+   ```
+
+3. **Reduce detection frequency**:
+   ```javascript
+   // In VideoStream.js
+   const captureFrame = useCallback(() => {
+     // ... existing code ...
+   }, [socket, isStreaming]);
+   
+   // Change interval from 100ms to 200ms
+   useEffect(() => {
+     if (isStreaming && socket?.connected) {
+       const interval = setInterval(captureFrame, 200); // Increased interval
+       return () => clearInterval(interval);
+     }
+   }, [isStreaming, socket?.connected, captureFrame]);
+   ```
+
+## 🔒 Security Considerations
+
+### Local Development
+- System runs only on localhost by default
+- No external network access required after setup
+- Camera data processed locally only
+
+### Firewall Configuration
+```cmd
+# Allow Python through Windows Firewall
+netsh advfirewall firewall add rule name="Python Flask" dir=in action=allow program="C:\path\to\python.exe"
+
+# Allow Node.js through Windows Firewall  
+netsh advfirewall firewall add rule name="Node.js" dir=in action=allow program="C:\Program Files\nodejs\node.exe"
+```
+
+### Browser Security
+- Only grant camera permissions to localhost
+- Use HTTPS in production (not covered in this guide)
+- Regularly update browser for security patches
+
+## 📊 Monitoring & Logs
+
+### Backend Logs
+- Console output shows detection statistics
+- Error messages displayed in Command Prompt
+- Add logging to file if needed:
+
+```python
+# In backend/app.py
+import logging
+logging.basicConfig(filename='app.log', level=logging.INFO)
+```
+
+### Frontend Logs
+- Browser Developer Tools > Console
+- Network tab for WebSocket connections
+- React DevTools for component debugging
+
+### System Monitoring
+```cmd
+# Monitor CPU usage
+wmic cpu get loadpercentage /value
+
+# Monitor memory usage
+wmic OS get TotalVisibleMemorySize,FreePhysicalMemory /value
+
+# Monitor network connections
+netstat -an | findstr :5000
+netstat -an | findstr :3000
+```
+
+## 🚀 Production Deployment
+
+### For Local Network Access
+
+1. **Change backend host**:
+   ```python
+   # In backend/app.py
+   socketio.run(app, host='0.0.0.0', port=5000)
+   ```
+
+2. **Update frontend proxy**:
+   ```json
+   // In package.json
+   "proxy": "http://YOUR_IP_ADDRESS:5000"
+   ```
+
+3. **Configure Windows Firewall**:
+   ```cmd
+   netsh advfirewall firewall add rule name="Flask Backend" dir=in action=allow protocol=TCP localport=5000
+   netsh advfirewall firewall add rule name="React Frontend" dir=in action=allow protocol=TCP localport=3000
+   ```
+
+### Service Installation (Advanced)
+
+To run as Windows service, consider using:
+- **NSSM** (Non-Sucking Service Manager)
+- **Python windows-service wrapper**
+- **Task Scheduler** for automatic startup
+
+## 📝 Backup & Recovery
+
+### Backup Important Files
+```cmd
+# Create backup directory
+mkdir backup_%date:~-4,4%%date:~-10,2%%date:~-7,2%
+
+# Copy configuration files
+copy backend\app.py backup_%date:~-4,4%%date:~-10,2%%date:~-7,2%\
+copy frontend\src\components\*.js backup_%date:~-4,4%%date:~-10,2%%date:~-7,2%\
+copy requirements.txt backup_%date:~-4,4%%date:~-10,2%%date:~-7,2%\
+```
+
+### Environment Recreation
+```cmd
+# Export current environment
+pip freeze > requirements_current.txt
+
+# Recreate environment
+python -m venv venv_new
+venv_new\Scripts\activate.bat
+pip install -r requirements_current.txt
+```
+
+## 📞 Support & Maintenance
+
+### Regular Maintenance
+- **Update dependencies monthly**:
+  ```cmd
+  pip install --upgrade -r requirements.txt
+  npm update
+  ```
+
+- **Clear browser cache** if experiencing issues
+- **Restart services** daily for optimal performance
+- **Monitor disk space** for log files
+
+### Getting Help
+1. Check error messages in Command Prompt
+2. Review browser Developer Tools console
+3. Verify all prerequisites are correctly installed
+4. Test with minimal configuration first
 
 ---
 
-**Built with ❤️ for intelligent surveillance and demographic analysis**
+**Ready to deploy? Start with Method 1 (Automated Setup) for the smoothest experience! 🎯**
