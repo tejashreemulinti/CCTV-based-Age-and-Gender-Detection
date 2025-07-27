@@ -1,6 +1,31 @@
 # 🎯 CCTV Age and Gender Detection System
 
-A **real-time, lightweight AI system** for detecting faces and estimating age/gender from webcam feeds. Built for **Windows environments** with browser-based interface, optimized for modest hardware (CPU-only, laptops).
+A **real-time, lightweight AI system** for detecting faces and estimating age/gender from webcam feeds. Built for **Windows environments** with **VS Code integration** and browser-based interface, optimized for modest hardware (CPU-only, laptops).
+
+## 🚀 Quick Start (Clone & Run)
+
+### Prerequisites
+1. **Python 3.8+** - [Download here](https://www.python.org/downloads/)
+2. **Node.js 16+** - [Download here](https://nodejs.org/)
+3. **VS Code** (recommended) - [Download here](https://code.visualstudio.com/)
+
+### Clone & Setup
+```bash
+# Clone repository
+git clone <your-repository-url>
+cd cctv-detection-system
+
+# Open in VS Code
+code .
+
+# Run automated setup
+setup.bat
+
+# Start the system
+run_system.bat
+```
+
+**Access at: http://localhost:3000** 🎉
 
 ## ✨ Features
 
@@ -9,7 +34,7 @@ A **real-time, lightweight AI system** for detecting faces and estimating age/ge
 - 📊 **Live Analytics Dashboard** with interactive charts
 - 🌐 **Modern Web Interface** (React + Material-UI)
 - ⚡ **High Performance** (10-15 FPS on CPU)
-- 🖥️ **Windows Compatible** with easy setup
+- 🖥️ **Windows Optimized** with VS Code integration
 - 📱 **Browser-based** - no additional software needed
 - 🔒 **Privacy-first** - all processing done locally
 
@@ -27,79 +52,82 @@ A **real-time, lightweight AI system** for detecting faces and estimating age/ge
 - Recharts for data visualization
 - Socket.IO client for real-time updates
 
-## 🚀 Quick Start (Windows)
+**Development:**
+- VS Code with integrated debugging
+- Python virtual environment
+- Automated Windows batch scripts
+- Git integration ready
 
-### Prerequisites
+## 📁 Repository Structure
 
-1. **Python 3.8+** - Download from [python.org](https://www.python.org/downloads/)
-2. **Node.js 16+** - Download from [nodejs.org](https://nodejs.org/)
-3. **Web Browser** - Chrome, Firefox, or Edge with camera permissions
-
-### Automated Setup
-
-1. **Clone or download** this project to your Windows machine
-2. **Open Command Prompt** as Administrator (recommended)
-3. **Navigate** to the project directory:
-   ```cmd
-   cd path\to\cctv-detection-system
-   ```
-4. **Run the setup script**:
-   ```cmd
-   setup.bat
-   ```
-5. **Start the system**:
-   ```cmd
-   run_system.bat
-   ```
-
-That's it! The system will automatically:
-- Create Python virtual environment
-- Install all dependencies
-- Start both backend and frontend servers
-- Open your browser to the application
-
-### Manual Setup (if needed)
-
-If the automated setup doesn't work, follow these steps:
-
-#### Backend Setup
-```cmd
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-venv\Scripts\activate.bat
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Start backend server
-cd backend
-python app.py
 ```
-
-#### Frontend Setup (new Command Prompt window)
-```cmd
-# Navigate to frontend directory
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start development server
-npm start
+cctv-detection-system/
+├── .vscode/                    # VS Code configuration
+│   ├── settings.json          # Workspace settings
+│   ├── tasks.json             # Build tasks
+│   ├── launch.json            # Debug configuration
+│   └── extensions.json        # Recommended extensions
+├── backend/                    # Python Flask backend
+│   ├── app.py                 # Main Flask application
+│   ├── simple_detection.py    # Face detection system
+│   ├── model_handler.py       # Model management
+│   └── enhanced_models.py     # Advanced model support
+├── frontend/                   # React frontend
+│   ├── public/                # Static files
+│   ├── src/                   # React source code
+│   │   ├── App.js             # Main React application
+│   │   ├── index.js           # React entry point
+│   │   └── components/        # React components
+│   └── package.json           # Node.js dependencies
+├── setup.bat                   # Windows setup script
+├── run_backend.bat            # Start backend server
+├── run_frontend.bat           # Start frontend server
+├── run_system.bat             # Start both servers
+├── requirements.txt           # Python dependencies
+├── .gitignore                 # Git ignore rules
+├── VS_CODE_SETUP.md           # Detailed VS Code guide
+└── README.md                  # This file
 ```
 
 ## 🎮 Usage
 
-1. **Open your browser** to `http://localhost:3000`
-2. **Allow camera permissions** when prompted
-3. **Click "Start Detection"** to begin real-time analysis
-4. **View live results**:
-   - Face detection with bounding boxes
-   - Age and gender predictions
-   - Real-time statistics and charts
-   - System performance metrics
+1. **Clone repository** and open in VS Code
+2. **Run setup.bat** for automated installation
+3. **Start system** with run_system.bat or VS Code tasks
+4. **Open browser** to `http://localhost:3000`
+5. **Allow camera permissions** when prompted
+6. **Click "Start Detection"** to begin real-time analysis
+
+## 🔧 VS Code Integration
+
+### Quick Commands
+- **Ctrl+Shift+P** → "Tasks: Run Task":
+  - **Setup Project** - Complete installation
+  - **Start Full System** - Launch both servers
+  - **Start Backend** - Python Flask server only
+  - **Start Frontend** - React development server only
+
+### Debugging
+- **F5** - Start Flask backend with debugger
+- Set breakpoints in Python code
+- Integrated terminal for both Python and Node.js
+
+### Extensions (Auto-installed)
+- Python support with debugging
+- Prettier code formatting
+- ESLint JavaScript linting
+- Auto-rename HTML/JSX tags
+
+## 📊 Performance Specifications
+
+| Feature | Windows Performance |
+|---------|-------------------|
+| **Face Detection** | 10-15 FPS on CPU |
+| **Max Faces** | 4 simultaneous |
+| **Processing Latency** | <100ms per frame |
+| **Memory Usage** | ~500MB total |
+| **Browser Support** | Chrome, Firefox, Edge |
+| **Camera Resolution** | 640x480 default |
 
 ## 📊 API Endpoints
 
@@ -113,112 +141,66 @@ npm start
 - `GET /api/health` - Check system health
 - `POST /api/reset-stats` - Reset detection counters
 
-## 📁 Project Structure
-
-```
-cctv-detection-system/
-├── backend/
-│   ├── app.py                 # Main Flask application
-│   ├── simple_detection.py    # Face detection system
-│   └── model_handler.py       # Model management
-├── frontend/
-│   ├── src/
-│   │   ├── App.js             # Main React application
-│   │   └── components/        # React components
-│   ├── public/
-│   └── package.json
-├── requirements.txt           # Python dependencies
-├── setup.bat                  # Windows setup script
-├── run_system.bat            # Start both servers
-├── run_backend.bat           # Start backend only
-├── run_frontend.bat          # Start frontend only
-└── README.md                 # This file
-```
-
 ## 🔧 Configuration
 
 ### Camera Settings
-- **Resolution**: 640x480 (default) - adjustable in VideoStream.js
-- **Frame Rate**: 10-15 FPS - automatically optimized
-- **Detection Threshold**: 0.3 confidence minimum
+Edit `frontend/src/components/VideoStream.js`:
+```javascript
+const videoConstraints = {
+  width: 640,      // Adjust resolution
+  height: 480,     // Adjust resolution
+  facingMode: "user"
+};
+```
 
-### Performance Tuning
-- **Face Detection**: Haar Cascade scaleFactor = 1.1
-- **Min Face Size**: 30x30 pixels
-- **Max Faces**: 4 simultaneous detections
-- **Processing**: CPU-optimized for Windows
-
-### Browser Compatibility
-- ✅ Chrome 80+
-- ✅ Firefox 75+
-- ✅ Edge 80+
-- ✅ Safari 13+ (macOS)
+### Performance Settings
+Edit `backend/simple_detection.py`:
+```python
+faces = self.face_cascade.detectMultiScale(
+    gray,
+    scaleFactor=1.1,      # Lower for more accuracy (slower)
+    minNeighbors=5,       # Higher for fewer false positives
+    minSize=(30, 30),     # Minimum face size
+)
+```
 
 ## 🛡️ Security & Privacy
 
-- **Local Processing**: No data sent to external servers
-- **Camera Access**: WebRTC with user permission only
-- **No Storage**: Video frames processed in memory only
-- **CORS Protection**: Backend configured for localhost only
-
-## ⚡ Performance Optimization
-
-**For better performance:**
-
-1. **Close unnecessary applications** while running
-2. **Use dedicated GPU** (if available) by modifying OpenCV settings
-3. **Adjust camera resolution** in `frontend/src/components/VideoStream.js`
-4. **Reduce max faces** in `backend/simple_detection.py`
+- ✅ **100% Local Processing** - No external API calls
+- ✅ **No Data Storage** - Real-time analysis only
+- ✅ **Browser-Controlled Camera** - User permission required
+- ✅ **Localhost Only** - No network exposure by default
+- ✅ **Windows Firewall Compatible** - Standard ports
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
+**"Python is not recognized":**
+- Reinstall Python with "Add to PATH" checked
+- Or use: Ctrl+Shift+P → "Python: Select Interpreter"
+
 **Camera not working:**
-- Ensure browser has camera permissions
-- Close other applications using the camera
-- Try refreshing the page
+- Check Windows Privacy Settings > Camera
+- Try Chrome browser (best compatibility)
+- Close other apps using camera
 
-**Backend connection error:**
-- Check if Python virtual environment is activated
-- Verify backend is running on port 5000
-- Check Windows Firewall settings
-
-**Frontend not loading:**
-- Ensure Node.js is properly installed
-- Check if port 3000 is available
-- Clear browser cache and try again
-
-**Poor performance:**
-- Close resource-intensive applications
-- Lower camera resolution in settings
-- Reduce detection frequency
-
-### Windows-Specific Issues
-
-**Python not found:**
-```cmd
-# Add Python to PATH or use full path
-C:\Users\YourName\AppData\Local\Programs\Python\Python39\python.exe -m venv venv
-```
-
-**Permission denied:**
-- Run Command Prompt as Administrator
-- Check antivirus software isn't blocking execution
+**VS Code Issues:**
+- Reload window: Ctrl+Shift+P → "Developer: Reload Window"
+- Install recommended extensions when prompted
 
 **Port conflicts:**
-- Backend: Change port in `backend/app.py` (line: `socketio.run(app, port=5000)`)
-- Frontend: Change port with `npm start -- --port 3001`
+- Backend: Change port in `backend/app.py`
+- Frontend: Run `npm start -- --port 3001`
 
 ## 🔮 Future Enhancements
 
+- [ ] **TensorFlow Lite Integration** - Production-ready models
 - [ ] **GPU Acceleration** - CUDA support for NVIDIA GPUs
-- [ ] **Advanced Models** - TensorFlow Lite integration
 - [ ] **Multi-camera Support** - Multiple webcam inputs
 - [ ] **Data Export** - CSV/JSON export of statistics
 - [ ] **Real-time Alerts** - Email/SMS notifications
 - [ ] **Database Storage** - SQLite for historical data
-- [ ] **Mobile App** - React Native companion app
 
 ## 🤝 Use Cases
 
@@ -228,18 +210,22 @@ C:\Users\YourName\AppData\Local\Programs\Python\Python39\python.exe -m venv venv
 - **Research Projects** - Computer vision and ML studies
 - **Smart Buildings** - Occupancy and demographic tracking
 
-## 📝 License
+## 📝 Documentation
 
-This project is for educational and commercial use. Please ensure compliance with local privacy laws when deploying in production environments.
+- **[VS_CODE_SETUP.md](VS_CODE_SETUP.md)** - Detailed VS Code development guide
+- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Comprehensive deployment instructions
+- **[WINDOWS_QUICK_START.md](WINDOWS_QUICK_START.md)** - 8-minute setup guide
 
-## 🆘 Support
+## 📞 Support
 
-For technical support or questions:
-1. Check the troubleshooting section above
-2. Review the configuration options
+For technical support:
+1. Check [VS_CODE_SETUP.md](VS_CODE_SETUP.md) for development issues
+2. Review [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for setup problems
 3. Ensure all prerequisites are properly installed
-4. Test with different browsers if issues persist
+4. Test with Chrome browser for best compatibility
 
 ---
 
-**Made for Windows environments with ❤️ for real-time computer vision applications**
+**Ready to analyze demographics in real-time with VS Code! 🚀📊**
+
+**Built with ❤️ for Windows development environments**
